@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<ul>
+
+    {% for i in range(length) %}
+       <input type="radio" name="{{ i }}"<li>{{ hometeam[i] }}</li>
+        <input type="radio" name="{{ i }}"<li>{{ awayteam[i] }} {{ spreadlist[i] }}</li>
+
+<br>
+
+  {% endfor %}
+</ul>
