@@ -1,5 +1,9 @@
 <!DOCTYPE html>
+<head>
+<link rel ="stylesheet" type ="text/css" href="{{url_for('static', filename='style.css')}}">
 
+
+</head>
 {% if user %} <!-- regular flask/python code between %% -->
 <h1>Hello {{ user}}</h1>
 {% else %}

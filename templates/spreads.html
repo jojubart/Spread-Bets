@@ -1,11 +1,24 @@
 <!DOCTYPE html>
-<ul>
+<html>
+<head>
+<link rel ="stylesheet" type ="text/css" href="/static/style.css">
 
+
+</head>
+<h2>SPREAD BETS WEEK 2</h2>
+<p>"HELLO"</p>
+
+<form name="myForm" action="" method="post" onsubmit="">
+
+<ul>
     {% for i in range(length) %}
-       <input type="radio" name="{{ i }}"<li>{{ hometeam[i] }}</li>
-        <input type="radio" name="{{ i }}"<li>{{ awayteam[i] }} {{ spreadlist[i] }}</li>
+        <input type="radio" name="hteams" value="{{ hometeam[i] }}"<li>{{ hometeam[i] }}</li>
+        <input type="radio" name="ateams" value="{{ awayteam[i] }}" <li>{{ awayteam[i] }} {{ spreadlist[i] }}</li>
 
 <br>
 
   {% endfor %}
 </ul>
+<p><input type=submit value=Submit></p>
+</form>
+</html>

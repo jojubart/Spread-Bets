@@ -4,6 +4,7 @@ import requests
 import itertools # for zip iteration
 import datetime # to run on pythonanywhere.com only on Thursdays
 from bs4 import BeautifulSoup
+from scrape import dictScores, length, hometeam, awayteam, spreadlist, listScores
 
 
 
@@ -24,48 +25,21 @@ def profile(username):
 def week(week):
     return "This is week {}".format(week)
 
-@app.route("/spreads")
+@app.route("/spreads", methods = ["GET", "POST"])
 def spread():
+    for item in request.form.values():
+        print(item)
+    #ateam = request.form["ateams"]
     return render_template("spreads.html", hometeam = hometeam, awayteam = awayteam, spreadlist = spreadlist, length = length)
 
 
+@app.route("/result", methods = ['POST', 'GET'])
+def result():
+    if request.method =='POST':
+        result = request.form
+        return render_template("result.html", result = result)
 
-
-# Spread Scrape:
-url = "https://www.cbssports.com/nfl/features/writers/expert/picks"
-r = requests.get(url)
-r_html = r.content
-soup = BeautifulSoup(r_html, "html.parser")
-
-td = soup.find_all("td")
-
-away_teams = soup.find_all("span", {"class": "teamAbbrPreview fright"})
-home_teams = soup.find_all("span", {"class": "teamAbbrPreview fleft"})
-spreads = soup.find_all("span", {"id": "lineNumber"})
-
-slist = []
-hometeam = []
-awayteam = []
-spreadlist = []
-# zip items from the three lists together
-for away, home, spread in zip(away_teams, home_teams,
-                              spreads):
-    slist.append('{} {} {} {}'.format(away.text, "@", home.text, spread.text))
-    hometeam.append(home.text)
-    awayteam.append(away.text)
-    spreadlist.append(spread.text)
-
-#slist = ("\n".join(slist))
-print(slist)
-print(spreadlist)
-length = len(hometeam)
-
-
-
-
-
-
-
+userBets = []
 
 
 if __name__ == "__main__":
